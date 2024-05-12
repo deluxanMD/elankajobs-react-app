@@ -1,0 +1,59 @@
+name: Pull request into dev, main
+
+on:
+  pull_request:
+    branches:
+      - "dev"
+      - "main"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Node modules
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint:check
+
+      - name: Prettier
+        run: npm run prettier:check
+
+      - name: Jest
+        run: npm run test
+
+  build-and-deploy:
+    needs: test
+    if: github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Node modules
+        run: npm ci
+
+      - name: Build Project
+        run: npm run build
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: premium243.web-hosting.com
+          username: elandpwv
+          password: X2fV9Gru2Qqn
+          local-dir: build/
+          server-dir: public_html/
