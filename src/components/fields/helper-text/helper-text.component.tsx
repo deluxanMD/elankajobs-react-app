@@ -1,19 +1,17 @@
 import { Box, Typography, useTheme } from '@mui/material';
-import React from 'react';
 
-type HelperTextProps = {
+interface HelperTextProps {
   errorMessage?: string;
   helperText?: string;
-  'data-testid'?: string;
-};
+}
 
-const HelperText = ({ errorMessage, helperText, 'data-testid': dataTestId }: HelperTextProps) => {
+const HelperText = ({ errorMessage, helperText }: HelperTextProps) => {
   const {
     palette: { error, info }
   } = useTheme();
 
   return (
-    <Box data-testid={`${dataTestId}.HelperText`}>
+    <Box data-testid="HelperText">
       <Typography color={!!errorMessage ? error.main : info.main}>{errorMessage ?? helperText}</Typography>
     </Box>
   );

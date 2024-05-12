@@ -1,5 +1,5 @@
 import { InputAdornment, TextField, TextFieldProps } from '@mui/material';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import HelperText from '../helper-text/helper-text.component';

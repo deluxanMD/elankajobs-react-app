@@ -2,7 +2,8 @@
   "root": true,
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "jest": true
   },
   "extends": [
     "prettier",
@@ -10,7 +11,8 @@
     "plugin:jsx-a11y/recommended",
     "plugin:react-hooks/recommended",
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "settings": {
     "react": {
@@ -29,7 +31,7 @@
       }
     }
   },
-  "parser": "@babel/eslint-parser",
+  // "parser": "@babel/eslint-parser",
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
@@ -40,7 +42,7 @@
   },
   "plugins": ["prettier", "react", "react-hooks"],
   "rules": {
-    "react/jsx-uses-react": "error",
+    "react/jsx-uses-react": "off",
     "react/jsx-uses-vars": "error",
     "react/react-in-jsx-scope": "off",
     "no-undef": "off",
@@ -70,9 +72,10 @@
       }
     ],
     "no-unused-vars": [
-      "off",
+      "error",
       {
-        "ignoreRestSiblings": false
+        "ignoreRestSiblings": false,
+        "varsIgnorePattern": "React"
       }
     ],
     "prettier/prettier": [
